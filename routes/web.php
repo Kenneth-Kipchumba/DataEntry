@@ -15,9 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::get('show', [CheckerController::class, 'show']);
-Route::post('check_id', [CheckerController::class, 'check_id']);
-Route::get('data_entry', [CheckerController::class, 'data_entry']);
+Route::middleware('auth')->group(function ()
+{
+    Route::get('show', [CheckerController::class, 'show']);
+    Route::post('check_id', [CheckerController::class, 'check_id']);
+    Route::get('data_entry', [CheckerController::class, 'data_entry']);
+});
